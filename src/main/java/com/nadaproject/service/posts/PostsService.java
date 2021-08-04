@@ -2,10 +2,8 @@ package com.nadaproject.service.posts;
 
 import com.nadaproject.domain.posts.Posts;
 import com.nadaproject.domain.posts.PostsRepository;
-import com.nadaproject.web.dto.PostsListResponseDto;
-import com.nadaproject.web.dto.PostsResponseDto;
-import com.nadaproject.web.dto.PostsSaveRequestDto;
-import com.nadaproject.web.dto.PostsUpdateRequestDto;
+import com.nadaproject.domain.user.UserRepository;
+import com.nadaproject.web.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +18,7 @@ import java.util.stream.Collectors;
 @Service
 public class PostsService {
     private final PostsRepository postsRepository;
+    private final UserRepository userRepository;
 
     @Transactional
     public Long save(PostsSaveRequestDto requestDto) {
@@ -62,6 +61,11 @@ public class PostsService {
                 .collect(Collectors.toList());
         //.map(PostsListResponseDto::new)의 식은 실제로 .map(posts -> new PostsListResponseDto(posts))와 같음
         //postsRepository결과로 넘어온 Posts의 Stream을 map을 통해 PostsListResponseDto 변환 -> List로 반환하는 메소드
+    }
+
+    @Transactional(readOnly = true)
+    public List<UserListDto> findAll(){
+        return userRepository.findAll().stream().map(UserListDto::new).collect(Collectors.toList());
     }
 
 }

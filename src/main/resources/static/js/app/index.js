@@ -11,6 +11,9 @@ var index = {
         $('#btn-delete').on('click', function (){
             _this.delete();
         });
+        $('#btn-view').on('click', function (){
+            _this.view();
+        });
     },
     save : function () {
         var data = {
@@ -74,6 +77,20 @@ var index = {
             alert(JSON.stringify(error));
         });
     }
+
+//    view : function () {
+//        var data = {
+//            title: $('#title').val(),
+//            author: $('#author').val(),
+//            content: $('#content').val()
+//        }
+//        $.ajax({
+//            type: 'POST'
+//            url:
+//        })
+//
+//
+//    }
 
 };
 
