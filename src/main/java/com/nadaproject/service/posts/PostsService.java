@@ -2,7 +2,6 @@ package com.nadaproject.service.posts;
 
 import com.nadaproject.domain.posts.Posts;
 import com.nadaproject.domain.posts.PostsRepository;
-import com.nadaproject.domain.user.User;
 import com.nadaproject.domain.user.UserRepository;
 import com.nadaproject.web.dto.*;
 import lombok.RequiredArgsConstructor;
@@ -69,9 +68,4 @@ public class PostsService {
         return userRepository.findAll().stream().map(UserListDto::new).collect(Collectors.toList());
     }
 
-    public UserListDto findAllUser(Long id) {
-        User entity = userRepository.findById(id)
-                .orElseThrow(()->new IllegalArgumentException("해당 유저가 없습니다. id = "+id));
-        return new UserListDto(entity);
-    }
 }

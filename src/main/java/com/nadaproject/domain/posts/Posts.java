@@ -19,9 +19,6 @@ public class Posts extends BaseTimeEntity { //Posts 클래스는 실제 DB의 �
     @GeneratedValue(strategy = GenerationType.IDENTITY) //PK의 생성 규칙. GenrationType.IDENTITY 옵션을 추가해야만 auto_increment가 됨.
     private Long id;
 
-    @Column
-    private String email;
-
     //Column 테이블의 칼럼을 나타내며 굳이 선언하지 않더라도 해당 클래스의 필드는 모두 칼럼이 됨.
     //문자열의 경우 VARCHAR(255)가 기본값인데, 사이즈를 500으로 늘리고 싶거나, 타입을 TEXT로 변경하고 싶거나 등의 경우에 사용됨
     @Column(length = 500, nullable = false)
@@ -36,8 +33,7 @@ public class Posts extends BaseTimeEntity { //Posts 클래스는 실제 DB의 �
     //값 변경이 필요한 경우 해당 이벤트에 맞는 public메소드를 호출하여 변경하는 것을 전제로 함.
     //하지만 우리는 Builder를 이용함. 생성자나 Builder나 생성 시점에 값을 채워주는 역할은 똑같음.
     @Builder
-    public Posts(String email, String title, String content, String author) {
-        this.email = email;
+    public Posts(String title, String content, String author) {
         this.title = title;
         this.content = content;
         this.author = author;
