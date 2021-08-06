@@ -2,6 +2,7 @@ package com.nadaproject.config.auth.dto;
 
 import com.nadaproject.domain.user.Role;
 import com.nadaproject.domain.user.User;
+import com.nadaproject.domain.userinfo.UserInfo;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -68,6 +69,18 @@ public class OAuthAttributes {
                 .email(email)
                 .picture(picture)
                 .role(Role.GUEST)
+                .build();
+    }
+
+    public UserInfo toEntity1() {
+        return UserInfo.builder()
+                .email(email)
+                .phone_num(null)
+                .bluetooth_data(null)
+                .birth_data(null)
+                .getTime(null)
+                .latitude(0)
+                .longitude(0)
                 .build();
     }
 }

@@ -1,6 +1,8 @@
 package com.nadaproject.web;
 
 import com.google.gson.Gson;
+import com.nadaproject.config.auth.LoginUser;
+import com.nadaproject.config.auth.dto.SessionUser;
 import com.nadaproject.service.posts.PostsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,5 +25,11 @@ public class JsonController {
     public String viewPost(@PathVariable Long id) {
         String id_post_list = new Gson().toJson(postsService.findById(id));
         return id_post_list;
+    }
+
+    @GetMapping("/now/user")
+    public String viewNowUser(@LoginUser SessionUser user){
+        String nowUserInfo = new Gson().toJson(user);
+        return nowUserInfo;
     }
 }

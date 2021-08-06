@@ -11,12 +11,13 @@ var index = {
         $('#btn-delete').on('click', function (){
             _this.delete();
         });
-        $('#btn-view').on('click', function (){
-            _this.view();
-        });
+//        $('#btn-view').on('click', function (){
+//            _this.view();
+//        });
     },
     save : function () {
         var data = {
+//            email: $('#userName').val(),
             title: $('#title').val(),
             author: $('#author').val(),
             content: $('#content').val()
