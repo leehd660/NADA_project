@@ -14,7 +14,11 @@ public class UserInfo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(columnDefinition = "TEXT", nullable = false)
+    @Column
+    private String name;
+    private String email;
+
+    @Column(columnDefinition = "TEXT", nullable = true)
     private String phone_num;
     private String bluetooth_data;
 
@@ -31,8 +35,10 @@ public class UserInfo {
     private double longitude; //경도데이터
 
     @Builder
-    public UserInfo(String phone_num, String bluetooth_data,String birth_data,
+    public UserInfo(String name, String email, String phone_num, String bluetooth_data,String birth_data,
                     String getTime, double latitude, double longitude) {
+        this.name = name;
+        this.email = email;
         this.phone_num = phone_num;
         this.bluetooth_data = bluetooth_data;
         this.birth_data = birth_data;

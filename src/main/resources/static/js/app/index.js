@@ -17,6 +17,7 @@ var index = {
     },
     save : function () {
         var data = {
+            userid: $('').val(),
             title: $('#title').val(),
             author: $('#author').val(),
             content: $('#content').val()

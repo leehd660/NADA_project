@@ -1,19 +1,26 @@
 package com.nadaproject.web.dto;
 
-import com.nadaproject.domain.user.Role;
-import com.nadaproject.domain.user.User;
+import com.nadaproject.domain.userinfo.UserInfo;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
 public class UserListDto {
-    private Long id;
+    private String name;
     private String email;
-    private Role role;
+//    private Role role;
 
-    public UserListDto(User entity){
-        this.id= entity.getId();
+    @Builder
+    public UserListDto(UserInfo entity){
+        this.name= entity.getName();
         this.email = entity.getEmail();
-        this.role = entity.getRole();
+//        this.role = entity.getRole();
+    }
+
+    public UserInfo toEntity(){
+        return UserInfo.builder().name(name).email(email).build();
     }
 
 }

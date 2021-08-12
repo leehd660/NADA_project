@@ -15,9 +15,11 @@ public class PostsSaveRequestDto {
     private  String title;
     private  String content;
     private  String author;
+//    private User userid;
 
     @Builder
     public PostsSaveRequestDto(String title, String content, String author) {
+//        this.userid= userid;
         this.title = title;
         this.content = content;
         this.author = author;

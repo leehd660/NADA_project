@@ -29,11 +29,15 @@ public class Posts extends BaseTimeEntity { //Posts 클래스는 실제 DB의 �
 
     private String author;
 
+//    @JoinColumn
+//    private User userid;
+
     //어떻게 DB에 값을 채워 insert하는가? : 기본적인 구조로는 생성자를 통해 최종값을 채운 후 DB에 삽입 insert하는 것.
     //값 변경이 필요한 경우 해당 이벤트에 맞는 public메소드를 호출하여 변경하는 것을 전제로 함.
     //하지만 우리는 Builder를 이용함. 생성자나 Builder나 생성 시점에 값을 채워주는 역할은 똑같음.
     @Builder
     public Posts(String title, String content, String author) {
+//        this.userid = userid;
         this.title = title;
         this.content = content;
         this.author = author;
