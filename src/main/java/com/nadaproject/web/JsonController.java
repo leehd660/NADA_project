@@ -1,15 +1,14 @@
 package com.nadaproject.web;
 
 import com.google.gson.Gson;
-import com.nadaproject.config.auth.LoginUser;
-import com.nadaproject.config.auth.dto.SessionUser;
 import com.nadaproject.service.posts.PostsService;
+import com.nadaproject.web.dto.UserAddInfoDto;
 import com.nadaproject.web.dto.UserListDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -29,14 +28,33 @@ public class JsonController {
         return id_post_list;
     }
 
-    @GetMapping("/now/user")
-    public String viewNowUser(@LoginUser SessionUser user){
-        String nowUserInfo = new Gson().toJson(user);
-        return nowUserInfo;
+//    @GetMapping("/now/user")
+//    public String viewNowUser(@LoginUser SessionUser user){
+//        String nowUserInfo = new Gson().toJson(user);
+//        return nowUserInfo;
+//    }
+
+    @PostMapping("/user/login/google")
+    public String saveUser (@RequestBody UserListDto userdto) {
+        Map<String, Object> map = new HashMap();
+        map.put("id", postsService.userSave(userdto));
+        String id_list = new Gson().toJson(map);
+        return id_list;
     }
 
-    @GetMapping("/user/login/google")
-    public void saveUser (@RequestBody UserListDto userdto) {
-        postsService.userSave(userdto);
+    @PostMapping("/user/login/addinfo/{id}")
+    public String saveAddInfo (@PathVariable Long id, @RequestBody UserAddInfoDto userAddInfoDto){
+        boolean answer = false;
+        String strId = Long.toString(id);
+        String str = postsService.userAddUpdate(id,userAddInfoDto);
+        if (str.equals(strId)){
+            answer = true;
+        }
+        Map<String, Object> map = new HashMap();
+        map.put("result", answer);
+        String result_list = new Gson().toJson(map);
+
+        return result_list;
     }
+
 }

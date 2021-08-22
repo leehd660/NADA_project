@@ -3,6 +3,7 @@ package com.nadaproject.service.posts;
 import com.nadaproject.domain.posts.Posts;
 import com.nadaproject.domain.posts.PostsRepository;
 import com.nadaproject.domain.user.UserRepository;
+import com.nadaproject.domain.userinfo.UserInfo;
 import com.nadaproject.domain.userinfo.UserInfoRepository;
 import com.nadaproject.web.dto.*;
 import lombok.RequiredArgsConstructor;
@@ -22,9 +23,15 @@ public class PostsService {
     private final UserRepository userRepository;
     private final UserInfoRepository userInfoRepository;
 
-    @Transactional
+    @Transactional //로그인을 할 때마다 id가 바뀌면서 정보가 계속 바껴서 user info에 이메일이 있으면 있던 id를 return하려고 함. 연습중
     public Long save(PostsSaveRequestDto requestDto) {
-        return postsRepository.save(requestDto.toEntity()).getId();
+        Long idNum = null;
+        Posts posts = (Posts) postsRepository.findByAuthor(requestDto.getAuthor());
+        if (posts == null){
+            idNum = postsRepository.save(requestDto.toEntity()).getId();
+        }
+        else idNum = posts.getId();
+        return idNum;
     }
 
     @Transactional
@@ -72,7 +79,17 @@ public class PostsService {
 
     @Transactional
     public String userSave(UserListDto userListDto) {
-        return userInfoRepository.save(userListDto.toEntity()).getName();
+        long num = userInfoRepository.save(userListDto.toEntity()).getId();
+        return Long.toString(num);
+    }
+
+    @Transactional
+    public String userAddUpdate(Long id, UserAddInfoDto userAddInfoDto){
+        UserInfo userInfo = userInfoRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 유저가 없습니다. id = " + id));
+
+        userInfo.addUpdate(userAddInfoDto.getName(),userAddInfoDto.getPhone_num(),userAddInfoDto.getBluetooth_data(),userAddInfoDto.getBirth_data());
+        return Long.toString(id);
     }
 
 }
