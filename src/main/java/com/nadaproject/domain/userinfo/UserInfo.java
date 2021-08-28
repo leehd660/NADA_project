@@ -16,6 +16,8 @@ public class UserInfo {
 
     @Column
     private String name;
+
+    @Column
     private String email;
 
     @Column(columnDefinition = "TEXT", nullable = true)
