@@ -8,11 +8,11 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface UserInfoRepository extends JpaRepository<UserInfo, Long> {
+public interface UserInfoRepository extends JpaRepository<User_info, Long> {
 
-    @Query("SELECT ui FROM UserInfo ui ORDER BY ui.id DESC")
-    List<UserInfo> findAllDesc();
+    @Query("SELECT ui FROM User_info ui ORDER BY ui.id DESC")
+    List<User_info> findAllDesc();
 
-    @Query(value = "SELECT ui.id FROM UserInfo ui where ui.email = :email", nativeQuery = true)
-    List<UserInfo> findIdByEmail(@Param("email") String email);
+    @Query(value = "SELECT ui.id FROM User_info ui where ui.email = :email", nativeQuery = true)
+    Long findIdByEmail(@Param("email") String email);
 }

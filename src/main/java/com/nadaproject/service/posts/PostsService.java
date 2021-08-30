@@ -3,7 +3,7 @@ package com.nadaproject.service.posts;
 import com.nadaproject.domain.posts.Posts;
 import com.nadaproject.domain.posts.PostsRepository;
 import com.nadaproject.domain.user.UserRepository;
-import com.nadaproject.domain.userinfo.UserInfo;
+import com.nadaproject.domain.userinfo.User_info;
 import com.nadaproject.domain.userinfo.UserInfoRepository;
 import com.nadaproject.web.dto.*;
 import lombok.RequiredArgsConstructor;
@@ -79,20 +79,19 @@ public class PostsService {
 
     @Transactional
     public String userSave(UserListDto userListDto) {
-//        String findEmail = "leehd660@naver.com";
-//        UserInfo finduserInfo = (UserInfo) userInfoRepository.findIdByEmail(findEmail);
-//        Long findId = finduserInfo.getId();
-//        if (finduserInfo.getId() == null){
-//            findId = userInfoRepository.save(userListDto.toEntity()).getId();
-//        }
-        Long findId = userInfoRepository.save(userListDto.toEntity()).getId();
+        String findEmail = userListDto.getEmail();
+        Long findId = userInfoRepository.findIdByEmail(findEmail);
+        if (findId == null){
+            findId = userInfoRepository.save(userListDto.toEntity()).getId();
+        }
+        //Long findId = userInfoRepository.save(userListDto.toEntity()).getId();
         return Long.toString(findId);
 
     }
 
     @Transactional
     public String userAddUpdate(Long id, UserAddInfoDto userAddInfoDto){
-        UserInfo userInfo = userInfoRepository.findById(id)
+        User_info userInfo = userInfoRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 유저가 없습니다. id = " + id));
 
         userInfo.addUpdate(userAddInfoDto.getName(),userAddInfoDto.getPhone_num(),userAddInfoDto.getBluetooth_data(),userAddInfoDto.getBirth_data());
