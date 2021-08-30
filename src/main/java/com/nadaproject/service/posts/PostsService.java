@@ -3,8 +3,8 @@ package com.nadaproject.service.posts;
 import com.nadaproject.domain.posts.Posts;
 import com.nadaproject.domain.posts.PostsRepository;
 import com.nadaproject.domain.user.UserRepository;
-import com.nadaproject.domain.userinfo.User_info;
 import com.nadaproject.domain.userinfo.UserInfoRepository;
+import com.nadaproject.domain.userinfo.User_info;
 import com.nadaproject.web.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -91,8 +91,7 @@ public class PostsService {
 
     @Transactional
     public String userAddUpdate(Long id, UserAddInfoDto userAddInfoDto){
-        User_info userInfo = userInfoRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 유저가 없습니다. id = " + id));
+        User_info userInfo = userInfoRepository.findInfoByID(id);
 
         userInfo.addUpdate(userAddInfoDto.getName(),userAddInfoDto.getPhone_num(),userAddInfoDto.getBluetooth_data(),userAddInfoDto.getBirth_data());
         return Long.toString(id);
