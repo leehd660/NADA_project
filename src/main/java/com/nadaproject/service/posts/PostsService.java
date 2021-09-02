@@ -79,13 +79,15 @@ public class PostsService {
 
     @Transactional
     public String userSave(UserListDto userListDto) {
+        boolean newId = false;
         String findEmail = userListDto.getEmail();
         Long findId = userInfoRepository.findIdByEmail(findEmail);
         if (findId == null){
             findId = userInfoRepository.save(userListDto.toEntity()).getId();
+            newId = true;
         }
         //Long findId = userInfoRepository.save(userListDto.toEntity()).getId();
-        return Long.toString(findId);
+        return Long.toString(findId) + " " + newId;
 
     }
 
@@ -96,5 +98,18 @@ public class PostsService {
         userInfo.addUpdate(userAddInfoDto.getName(),userAddInfoDto.getPhone_num(),userAddInfoDto.getBluetooth_data(),userAddInfoDto.getBirth_data());
         return Long.toString(id);
     }
+
+    @Transactional
+    public String gpsAddUpdate(Long id, GpsInfoDto gpsInfoDto){
+        User_info userInfo = userInfoRepository.findInfoByID(id);
+
+        userInfo.cname_update(gpsInfoDto.getGetTime(), gpsInfoDto.getLatitude(), gpsInfoDto.getLongitude());
+        return Long.toString(id);
+    }
+
+//    @Transactional
+//    public List<FindNearDto> findNearId(Long id, String getTime, double latitude, double longitude) {
+//        return userInfoRepository.findNearIdByCname()
+//    }
 
 }
