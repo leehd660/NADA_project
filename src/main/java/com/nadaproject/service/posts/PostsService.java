@@ -109,19 +109,22 @@ public class PostsService {
         return Long.toString(id);
     }
 
-//    @Transactional
-//    public List<FindNearDto> findNearId(Long id, String getTime, double latitude, double longitude) {
-//        String[] timeArr = getTime.split(":");
-//        for (String time : timeArr){
-//
-//        }
-//
-//        double upLatitude = latitude+0.0002;
-//        double downLatitude = latitude-0.0002;
-//        double upLogitude = longitude+0.0002;
-//        double downLongitude = longitude-0.0002;
+    @Transactional
+    public List<FindNearDto> findNearId(Long id, String getTime, double latitude, double longitude) {
+        //findNearId를 하면 user info테이블을 쭉 탐색해서 시간, 위도,경도 value가 오차 범위 안에 있는 것을 전부 뽑는다.
+        //결과 값은 findNearDto들의 리스트를 반환한다.
+        String[] timeArr = getTime.split(":");
+        for (String time : timeArr){
+
+        }
+
+        double upLatitude = latitude+0.0002;
+        double downLatitude = latitude-0.0002;
+        double upLogitude = longitude+0.0002;
+        double downLongitude = longitude-0.0002;
+
 //        return userInfoRepository.findNearIdByCname()
-//    }
+    }
 
     @Transactional
     public Long belongSave(BelongSaveDto belongSaveDto){
