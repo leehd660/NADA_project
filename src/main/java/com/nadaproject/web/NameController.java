@@ -16,9 +16,11 @@ public class NameController {
 
     @PutMapping("/add/friend/{id}")
     public String addFriendId(@PathVariable Long id, @RequestBody GpsInfoDto gpsInfoDto) {
+        //id는 자기 자신의 id.
         boolean answer = false;
-        String str = postsService.gpsAddUpdate(id,gpsInfoDto); //시간, gps데이터 저장
-        return str;
+        String myId = postsService.gpsAddUpdate(id,gpsInfoDto); //시간, gps데이터 저장
+
+        return myId;
     }
 
 }

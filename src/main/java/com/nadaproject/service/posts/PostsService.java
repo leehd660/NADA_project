@@ -1,5 +1,6 @@
 package com.nadaproject.service.posts;
 
+import com.nadaproject.domain.belonginfo.BelongInfoRepository;
 import com.nadaproject.domain.posts.Posts;
 import com.nadaproject.domain.posts.PostsRepository;
 import com.nadaproject.domain.user.UserRepository;
@@ -22,6 +23,7 @@ public class PostsService {
     private final PostsRepository postsRepository;
     private final UserRepository userRepository;
     private final UserInfoRepository userInfoRepository;
+    private final BelongInfoRepository belongInfoRepository;
 
     @Transactional //로그인을 할 때마다 id가 바뀌면서 정보가 계속 바껴서 user info에 이메일이 있으면 있던 id를 return하려고 함. 연습중
     public Long save(PostsSaveRequestDto requestDto) {
@@ -109,7 +111,23 @@ public class PostsService {
 
 //    @Transactional
 //    public List<FindNearDto> findNearId(Long id, String getTime, double latitude, double longitude) {
+//        String[] timeArr = getTime.split(":");
+//        for (String time : timeArr){
+//
+//        }
+//
+//        double upLatitude = latitude+0.0002;
+//        double downLatitude = latitude-0.0002;
+//        double upLogitude = longitude+0.0002;
+//        double downLongitude = longitude-0.0002;
 //        return userInfoRepository.findNearIdByCname()
 //    }
+
+    @Transactional
+    public Long belongSave(BelongSaveDto belongSaveDto){
+        Long saveId = belongInfoRepository.save(belongSaveDto.toEntity()).getUser_id();
+        //여기서 saveId는 userId임.
+        return saveId;
+    }
 
 }
