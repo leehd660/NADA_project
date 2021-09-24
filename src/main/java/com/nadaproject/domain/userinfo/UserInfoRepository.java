@@ -20,8 +20,9 @@ public interface UserInfoRepository extends JpaRepository<User_info, Long> {
     User_info findInfoByID(@Param("id") Long id);
 
 //    @Query(value = "SELECT ui.id, ui.name FROM User_info ui " +
-//            "WHERE (ui.get_time BETWEEN :get_time -10 AND :get_time +10 ) " +
-//            "AND ui.latitude BETWEEN :latitude -0.0002 AND :latitude", nativeQuery = true)
-//    User_info findNearIdByCname(@Param("id") Long id, @Param("get_time") String get_time,@Param("latitude") double latitude, @Param("longitude") double longitude);
+//            "WHERE ui.getTime <= :upgettime AND ui.getTime >= :downgettime " +
+//            "AND (ui.latitude BETWEEN :dolatitude AND :uplatitude)" +
+//            "AND (ui.longitude BETWEEN :dolongitude AND :uplongitude)", nativeQuery = true)
+//    List<FindNearDto> findNearIdByCname(@Param("id") Long id, @Param("upgettime") long upgettime, @Param("downgettime") long downgettime, @Param("uplatitude") double uplatitude, @Param("dolatitude") double dolatitude, @Param("uplongitude") double uplongitude, @Param("dolongitude") double dolongitude);
 
 }

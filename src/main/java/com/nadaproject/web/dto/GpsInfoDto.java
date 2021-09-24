@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class GpsInfoDto {
-    private String getTime;
+    private long getTime;
     private double latitude;
     private double longitude;
 

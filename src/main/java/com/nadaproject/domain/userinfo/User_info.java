@@ -28,7 +28,7 @@ public class User_info {
     private String birth_data;
 
     @Column
-    private String getTime; // 명함 교환할 때의 시간
+    private long getTime; // 명함 교환할 때의 시간
 
     @Column(nullable = true)
     private double latitude; //위도데이터
@@ -38,7 +38,7 @@ public class User_info {
 
     @Builder
     public User_info(String name, String email, String phone_num, String bluetooth_data, String birth_data,
-                     String getTime, double latitude, double longitude) {
+                     long getTime, double latitude, double longitude) {
         this.name = name;
         this.email = email;
         this.phone_num = phone_num;
@@ -49,7 +49,7 @@ public class User_info {
         this.longitude = longitude;
     }
 
-    public void cname_update(String getTime, double latitude, double longitude){
+    public void cname_update(long getTime, double latitude, double longitude){
         this.getTime = getTime;
         this.latitude = latitude;
         this.longitude = longitude;
