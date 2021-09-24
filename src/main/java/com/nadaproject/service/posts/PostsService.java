@@ -114,31 +114,31 @@ public class PostsService {
         return Long.toString(id);
     }
 
-//    @Transactional
-//    public List<FindNearDto> findNearId(Long id, Long getTime, double latitude, double longitude) {
-//        //findNearId를 하면 user info테이블을 쭉 탐색해서 시간, 위도,경도 value가 오차 범위 안에 있는 것을 전부 뽑는다.
-//        //결과 값은 findNearDto들의 리스트를 반환한다.
-////        List<User_info> userinfoArr = userInfoRepository.findAllDesc();
-////        String[] timeArr = getTime.split(":");
-////        for (String t : timeArr){
-////
-////        }
-//        long upTime = getTime + 10;
-//        long downTime = getTime - 10;
-//        double upLatitude = latitude+0.0002;
-//        double downLatitude = latitude-0.0002;
-//        double upLongitude = longitude+0.0002;
-//        double downLongitude = longitude-0.0002;
+    @Transactional
+    public List<FindNearDto> findNearId(Long id, Long getTime, double latitude, double longitude) {
+        //findNearId를 하면 user info테이블을 쭉 탐색해서 시간, 위도,경도 value가 오차 범위 안에 있는 것을 전부 뽑는다.
+        //결과 값은 findNearDto들의 리스트를 반환한다.
+//        List<User_info> userinfoArr = userInfoRepository.findAllDesc();
+//        String[] timeArr = getTime.split(":");
+//        for (String t : timeArr){
 //
-////        for (User_info i : userinfoArr){
-////            double testLat = i.getLatitude();
-////            double testlong = i.getLongitude();
-////            ;
-////            if ()
-////        }
-//
-//        return userInfoRepository.findNearIdByCname(id,upTime,downTime,upLatitude, downLatitude, upLongitude, downLongitude);
-//    }
+//        }
+        long upTime = getTime + 10;
+        long downTime = getTime - 10;
+        double upLatitude = latitude+0.0002;
+        double downLatitude = latitude-0.0002;
+        double upLongitude = longitude+0.0002;
+        double downLongitude = longitude-0.0002;
+
+//        for (User_info i : userinfoArr){
+//            double testLat = i.getLatitude();
+//            double testlong = i.getLongitude();
+//            ;
+//            if ()
+//        }
+
+        return userInfoRepository.findNearIdByCname(upTime,downTime,upLatitude, downLatitude, upLongitude, downLongitude);
+    }
 
     @Transactional
     public Long belongSave(BelongSaveDto belongSaveDto){
