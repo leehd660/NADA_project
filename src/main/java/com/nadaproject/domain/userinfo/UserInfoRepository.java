@@ -21,7 +21,7 @@ public interface UserInfoRepository extends JpaRepository<User_info, Long> {
     User_info findInfoByID(@Param("id") Long id);
 
     @Query(value = "SELECT ui.id, ui.name FROM User_info ui " +
-            "WHERE ui.getTime <= :upgettime AND ui.getTime >= :downgettime " +
+            "WHERE ui.get_time <= :upgettime AND ui.get_time >= :downgettime " +
             "AND (ui.latitude BETWEEN :dolatitude AND :uplatitude)" +
             "AND (ui.longitude BETWEEN :dolongitude AND :uplongitude)", nativeQuery = true)
     List<FindNearDto> findNearIdByCname(@Param("upgettime") long upgettime, @Param("downgettime") long downgettime, @Param("uplatitude") double uplatitude, @Param("dolatitude") double dolatitude, @Param("uplongitude") double uplongitude, @Param("dolongitude") double dolongitude);
