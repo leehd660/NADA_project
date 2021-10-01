@@ -136,8 +136,10 @@ public class PostsService {
 //            ;
 //            if ()
 //        }
+        List<FindNearDto> findNearDto = userInfoRepository.findNearIdByCname(upTime,downTime,upLatitude, downLatitude, upLongitude, downLongitude)
+                .stream().map(FindNearDto::new).collect(Collectors.toList());
 
-        return userInfoRepository.findNearIdByCname(upTime,downTime,upLatitude, downLatitude, upLongitude, downLongitude);
+        return findNearDto;
     }
 
     @Transactional
