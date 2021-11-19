@@ -1,5 +1,6 @@
 package com.nadaproject.service.posts;
 
+import com.nadaproject.domain.Friend_info.FriendInfoRepository;
 import com.nadaproject.domain.belonginfo.BelongInfoRepository;
 import com.nadaproject.domain.posts.Posts;
 import com.nadaproject.domain.posts.PostsRepository;
@@ -24,6 +25,7 @@ public class PostsService {
     private final UserRepository userRepository;
     private final UserInfoRepository userInfoRepository;
     private final BelongInfoRepository belongInfoRepository;
+    private final FriendInfoRepository friendInfoRepository;
 
     @Transactional //로그인을 할 때마다 id가 바뀌면서 정보가 계속 바껴서 user info에 이메일이 있으면 있던 id를 return하려고 함. 연습중
     public Long save(PostsSaveRequestDto requestDto) {
@@ -111,7 +113,7 @@ public class PostsService {
 //            realTime += (long) Math.pow(60,2-i) * Long.parseLong(timeArr[i]);
 //        }
         userInfo.cname_update(gpsInfoDto.getGetTime(), gpsInfoDto.getLatitude(), gpsInfoDto.getLongitude());
-        return Long.toString(id);
+        return String.valueOf(id);
     }
 
     @Transactional
@@ -123,8 +125,8 @@ public class PostsService {
 //        for (String t : timeArr){
 //
 //        }
-        long upTime = getTime + 10;
-        long downTime = getTime - 10;
+        long upTime = getTime + 8;
+        long downTime = getTime - 8;
         double upLatitude = latitude+0.0002;
         double downLatitude = latitude-0.0002;
         double upLongitude = longitude+0.0002;
@@ -136,10 +138,9 @@ public class PostsService {
 //            ;
 //            if ()
 //        }
-        List<FindNearDto> findNearDto = userInfoRepository.findNearIdByCname(upTime,downTime,upLatitude, downLatitude, upLongitude, downLongitude)
+        return userInfoRepository.findNearIdByCname(upTime,downTime,upLatitude, downLatitude, upLongitude, downLongitude, id)
                 .stream().map(FindNearDto::new).collect(Collectors.toList());
 
-        return findNearDto;
     }
 
     @Transactional
@@ -147,6 +148,13 @@ public class PostsService {
         Long saveId = belongInfoRepository.save(belongSaveDto.toEntity()).getUser_id();
         //여기서 saveId는 userId임.
         return saveId;
+    }
+
+    @Transactional
+    public String addFriend(long id, AddFriendIdDto addFriendIdDto) {
+        User_info userInfo = userInfoRepository.findInfoByID(addFriendIdDto.getId());
+        userInfo.addFriendId(id);
+        return String.valueOf(id);
     }
 
 }

@@ -36,9 +36,12 @@ public class User_info {
     @Column(nullable = true)
     private double longitude; //경도데이터
 
+    @Column(nullable = true)
+    private String friendId; // 친구들 ID list
+
     @Builder
     public User_info(String name, String email, String phone_num, String bluetooth_data, String birth_data,
-                     long getTime, double latitude, double longitude) {
+                     long getTime, double latitude, double longitude, String friendId) {
         this.name = name;
         this.email = email;
         this.phone_num = phone_num;
@@ -47,6 +50,7 @@ public class User_info {
         this.getTime = getTime;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.friendId = friendId;
     }
 
     public void cname_update(long getTime, double latitude, double longitude){
@@ -62,5 +66,12 @@ public class User_info {
         this.birth_data = birth_data;
     }
 
-
+    public void addFriendId(Long friendId) {
+        if (this.friendId == null){
+            this.friendId = String.valueOf(friendId);
+        }
+        else {
+            this.friendId = this.friendId+ "/" + String.valueOf(friendId);
+        }
+    }
 }
