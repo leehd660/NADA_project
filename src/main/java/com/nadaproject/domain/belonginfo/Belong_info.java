@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-public class belong_info {
+public class Belong_info {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,7 +34,7 @@ public class belong_info {
     private String fin_data;
 
     @Builder
-    public belong_info(long user_id, String belong_data, String position_data, String tel_data, String fax_data, String start_data, String fin_data) {
+    public Belong_info(long user_id, String belong_data, String position_data, String tel_data, String fax_data, String start_data, String fin_data) {
         this.user_id=user_id;
         this.belong_data=belong_data;
         this.position_data=position_data;
