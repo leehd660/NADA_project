@@ -16,6 +16,7 @@ public class ListPageController {
 
     @GetMapping("/view/friend/{id}")
     public List<String> viewList(@PathVariable Long id) {
+        //id는 내 아이디
         List<String> answer = postsService.viewFriendList(id);
         return answer;
     }
