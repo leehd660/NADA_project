@@ -23,8 +23,8 @@ public class BelongSaveDto {
         this.position_data= entity.getPosition_data();
         this.tel_data= entity.getTel_data();
         this.fax_data= entity.getFax_data();
-        this.start_data= entity.getStart_data();;
-        this.fin_data= entity.getFin_data();;
+        this.start_data= entity.getStart_data();
+        this.fin_data= entity.getFin_data();
     }
 
     public belong_info toEntity(){

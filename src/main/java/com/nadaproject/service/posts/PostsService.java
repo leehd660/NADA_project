@@ -2,6 +2,7 @@ package com.nadaproject.service.posts;
 
 import com.nadaproject.domain.Friend_info.FriendInfoRepository;
 import com.nadaproject.domain.belonginfo.BelongInfoRepository;
+import com.nadaproject.domain.career_posts.CareerpostsRepository;
 import com.nadaproject.domain.posts.Posts;
 import com.nadaproject.domain.posts.PostsRepository;
 import com.nadaproject.domain.user.UserRepository;
@@ -26,6 +27,7 @@ public class PostsService {
     private final UserInfoRepository userInfoRepository;
     private final BelongInfoRepository belongInfoRepository;
     private final FriendInfoRepository friendInfoRepository;
+    private final CareerpostsRepository careerpostsRepository;
 
     @Transactional //로그인을 할 때마다 id가 바뀌면서 정보가 계속 바껴서 user info에 이메일이 있으면 있던 id를 return하려고 함. 연습중
     public Long save(PostsSaveRequestDto requestDto) {
@@ -155,6 +157,12 @@ public class PostsService {
         User_info userInfo = userInfoRepository.findInfoByID(addFriendIdDto.getId());
         userInfo.addFriendId(id);
         return String.valueOf(id);
+    }
+
+    @Transactional
+    public String careerSave(CareerUploadDto careerUploadDto){
+        Long findId = careerpostsRepository.save(careerUploadDto.toEntity()).getId();
+        return Long.toString(findId);
     }
 
 }
