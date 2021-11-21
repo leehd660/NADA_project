@@ -172,6 +172,7 @@ public class PostsService {
 
     @Transactional
     public List<String> viewFriendList(long userId) {
+//        JsonArray jArray = new JsonArray();
         List<String> jsonReturnList = new ArrayList<>();
         String friendIdStr = userInfoRepository.findInfoByID(userId).getFriendId();
         String[] friendStrArr = friendIdStr.split("/");
@@ -189,8 +190,25 @@ public class PostsService {
 
             String mapToJson = new Gson().toJson(map);
             jsonReturnList.add(mapToJson);
+
         }
         return jsonReturnList;
     }
 
+    @Transactional
+    public String viewMyNamecard(Long id){
+        Map<String, List> map = new HashMap<>();
+        List<ViewUserInfoDto> userInfoList = userInfoRepository.findViewInfoByID(id)
+                .stream().map(ViewUserInfoDto::new).collect(Collectors.toList());
+        map.put("user_info", userInfoList);
+        List<ViewBelongInfoDto> belongInfoList = belongInfoRepository.findViewInfoByID(id)
+                .stream().map(ViewBelongInfoDto::new).collect(Collectors.toList());
+        map.put("belong_info",belongInfoList);
+        List<ViewCareerInfoDto> careerInfoList = careerpostsRepository.findViewInfoById(id)
+                .stream().map(ViewCareerInfoDto::new).collect(Collectors.toList());
+        map.put("career_info",careerInfoList);
+
+        String mapToJson = new Gson().toJson(map);
+        return mapToJson;
+    }
 }

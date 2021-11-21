@@ -28,4 +28,6 @@ public interface UserInfoRepository extends JpaRepository<User_info, Long> {
                                       @Param("dolatitude") double dolatitude, @Param("uplongitude") double uplongitude, @Param("dolongitude") double dolongitude,
                                       @Param("selfId") long selfId);
 
+    @Query(value = "SELECT * FROM User_info ui WHERE ui.id = :id", nativeQuery = true)
+    List<User_info> findViewInfoByID(@Param("id") long id);
 }

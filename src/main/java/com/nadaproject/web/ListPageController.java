@@ -21,4 +21,9 @@ public class ListPageController {
         return answer;
     }
 
+    @GetMapping("/namecard/my/{id}")
+    public String viewMyCard(@PathVariable Long id){
+        String jsonStr = postsService.viewMyNamecard(id);
+        return jsonStr;
+    }
 }
