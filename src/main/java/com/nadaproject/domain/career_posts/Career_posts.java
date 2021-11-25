@@ -1,6 +1,5 @@
 package com.nadaproject.domain.career_posts;
 
-import com.nadaproject.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +9,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Career_posts extends BaseTimeEntity {
+public class Career_posts{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
